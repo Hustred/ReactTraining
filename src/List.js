@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import ListItem from './ListItem.js';
+import logo from './logo.svg';
 
 const List = () => {
 
@@ -76,15 +77,21 @@ const List = () => {
         })
     }
 
-    return (
-        <div>
+    if(data.loaded) {
+        return (
             <div>
-                <input id="create_input" ref={ref} type="text"></input>
-                <button onClick={() => createListItem(data.listItems.length + 1, ref.current.value)}>Create</button>
+                <div>
+                    <input id="create_input" ref={ref} type="text"></input>
+                    <button onClick={() => createListItem(data.listItems.length + 1, ref.current.value)}>Create</button>
+                </div>
+                <ul>{data.listItems.map((listItemObj) => <ListItem elementId={listItemObj.id} text={listItemObj.text}
+                                                                   onUpdate={updateListItem}
+                                                                   onDelete={deleteListItem}/>)}</ul>
             </div>
-            <ul>{data.listItems.map((listItemObj) => <ListItem elementId={listItemObj.id} text={listItemObj.text} onUpdate={updateListItem} onDelete={deleteListItem}/>)}</ul>
-        </div>
-    );
+        );
+    } else {
+        return <img src={logo} className="App-logo" alt="logo" />
+    }
 }
 
 export default List;
