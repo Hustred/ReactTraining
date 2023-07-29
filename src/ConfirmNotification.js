@@ -2,48 +2,51 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import {useEffect, useState} from "react";
+import logo from "./logo.svg";
 
-export default function ConfirmNotification() {
-    const [open, setOpen] = React.useState(false);
+export default function ConfirmNotification({show, onOk, onClose, elementId}) {
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const [data, setData] = useState({
+        loaded: false
+    });
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const finishLoading = () => {
+        setData((prevState) => ({
+            ...prevState,
+            loaded: true,
+        }))
+    }
 
-    return (
-        <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open alert dialog
-            </Button>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    {"Are you sure that you want to delete list item?"}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Let Google help apps determine location. This means sending anonymous
-                        location data to Google, even when no apps are running.
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Disagree</Button>
-                    <Button onClick={handleClose} autoFocus>
-                        Agree
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
+    useEffect(() => {
+        if (!data.loaded) {
+            finishLoading();
+        }
+    });
+
+    if (data.loaded) {
+        return (
+            <div>
+                <Dialog
+                    open={show}
+                    onClose={() => onClose()}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {"Are you sure that you want to delete list item?"}
+                    </DialogTitle>
+                    <DialogActions>
+                        <Button onClick={() => onClose()}>Disagree</Button>
+                        <Button onClick={() => onOk(elementId)} autoFocus>
+                            Agree
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        );
+    } else {
+        return <img src={logo} className="App-logo" alt="logo"/>
+    }
 }

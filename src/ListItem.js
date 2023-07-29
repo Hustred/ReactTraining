@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import logo from './logo.svg';
 
 const ListItem = ({elementId, text, onDelete, onUpdate}) => {
 
@@ -20,17 +19,17 @@ const ListItem = ({elementId, text, onDelete, onUpdate}) => {
         }
     });
 
-    if(data.loaded) {
+    if (data.loaded) {
         return (
             <div>
-                <li contentEditable="true"
+                <li contentEditable="true" key={elementId} suppressContentEditableWarning
                     onInput={event => onUpdate(elementId, event.currentTarget.textContent)}> {text}
                 </li>
                 <button onClick={() => onDelete(elementId)}>Delete</button>
             </div>
         );
     } else {
-        return <img src={logo} className="App-logo" alt="logo" />
+        return <p>Loading...</p>
     }
 }
 
