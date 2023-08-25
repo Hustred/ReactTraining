@@ -1,9 +1,10 @@
 import '../index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "./Home";
-import Popular from "./Popular";
-import Battle from "./Battle";
+import Popular from "./popular/Popular";
+import Battle from "./battle/Battle";
 import Nav from "./Nav";
+import BattleResult from "./battle/BattleResult";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: "/battle",
                 element: <Battle/>,
+            },
+            {
+                path: "/battle/result",
+                element: <BattleResult/>,
             },
             {
                 path: "*",

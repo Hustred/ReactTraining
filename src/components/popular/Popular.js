@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useState} from "react";
-import {fetchPopularRepos} from "../utils/api";
+import {fetchPopularRepos} from "../../utils/api";
 import Repositories from "./Repositories";
-import Loading from "./Loading";
+import Loading from "../Loading";
 import {useSearchParams} from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
 
@@ -25,7 +25,7 @@ const Popular = () => {
     const handleLanguageChange = useCallback((event) => {
         const l = event.target.id;
         setSearchParams({language: l}, {replace: true})
-    }, []);
+    }, [setSearchParams]);
 
     if (error) {
         return <p>{error}</p>

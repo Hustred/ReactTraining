@@ -10,7 +10,7 @@ const Repositories = ({repos}) => {
                                 <img className='avatar' src={repo.owner.avatar_url} alt='Avatar'/>
                             </li>
                             <li>
-                                <a href={repo.html_url} target='_blank'>{repo.name}</a>
+                                <a href={repo.html_url} target='_blank' rel="noreferrer">{repo.name}</a>
                             </li>
                             <li>{repo.owner.login}</li>
                             <li>{repo.stargazers_count} stars</li>
