@@ -5,6 +5,7 @@ const PlayerInput = ({id, label, onSubmit}) => {
     const dispatch = useDispatch();
     const userNameOne = useSelector(state => state.battle.playerOneName)
     const userNameTwo = useSelector(state => state.battle.playerTwoName)
+
     const getUserName = () => {
         if (id === 'playerOne') {
             return userNameOne
@@ -24,10 +25,6 @@ const PlayerInput = ({id, label, onSubmit}) => {
         }
     }
 
-    const dispatchNameChange = (name) => {
-        dispatch(setPlayerName({name, id}))
-    }
-
     return (
         <form className='column' onSubmit={handleSubmit}>
             <label className='header' htmlFor={id}>{label}</label>
@@ -37,7 +34,7 @@ const PlayerInput = ({id, label, onSubmit}) => {
                 placeholder='GitHub Username'
                 autoComplete='off'
                 value={getUserName()}
-                onChange={(event) => dispatchNameChange(event.target.value)}
+                onChange={(event) => dispatch(setPlayerName({name: event.target.value, id}))}
             />
             <button className='button' disabled={!getUserName().length}>Submit</button>
         </form>

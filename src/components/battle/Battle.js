@@ -1,40 +1,33 @@
-import {useCallback, useState} from "react";
+import {useCallback} from "react";
 import PlayerPreview from "./PlayerPreview";
 import PlayerInput from "./PlayerInput";
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {setPlayerNameAndImage} from "../redux/battle/battle.actions";
 
 const Battle = () => {
-    const [playerData, setPlayerData] = useState({
-        playerOneName: '',
-        playerTwoName: '',
-        playerOneImage: null,
-        playerTwoImage: null
-    });
+    const dispatch = useDispatch();
+    const playerOneName = useSelector(state => state.battle.playerOneName)
+    const playerTwoName = useSelector(state => state.battle.playerTwoName)
+    const playerOneImage = useSelector(state => state.battle.playerOneImage)
+    const playerTwoImage = useSelector(state => state.battle.playerTwoImage)
 
     const handleSubmit = useCallback((id, userName) => {
-        setPlayerData((prevState) => ({
-            ...prevState,
-            [`${id}Name`]: userName,
-            [`${id}Image`]: `https://github.com/${userName}.png?size200`
-        }))
-    }, [] );
+        dispatch(setPlayerNameAndImage({name: userName, id, image: `https://github.com/${userName}.png?size200`}))
+    }, [dispatch] );
 
     const handleReset = (id) => {
-        setPlayerData((prevState) => ({
-            ...prevState,
-            [`${id}Name`]: '',
-            [`${id}Image`]: null
-        }))
+        dispatch(setPlayerNameAndImage({name: '', id, image: null}))
     }
 
     return (
         <div>
             <div className='row'>
-                {playerData.playerOneImage ?
+                {playerOneImage ?
                     <PlayerPreview
                         id='playerOne'
-                        avatar={playerData.playerOneImage}
-                        userName={playerData.playerOneName}>
+                        avatar={playerOneImage}
+                        userName={playerOneName}>
                         <button className='reset' onClick={() => handleReset('playerOne')}>Reset</button>
                     </PlayerPreview> :
                     <PlayerInput
@@ -42,11 +35,11 @@ const Battle = () => {
                         label='Player 1'
                         onSubmit={handleSubmit}
                     />}
-                {playerData.playerTwoImage ?
+                {playerTwoImage ?
                     <PlayerPreview
                         id='playerTwo'
-                        avatar={playerData.playerTwoImage}
-                        userName={playerData.playerTwoName}>
+                        avatar={playerTwoImage}
+                        userName={playerTwoName}>
                         <button className='reset' onClick={() => handleReset('playerTwo')}>Reset</button>
                     </PlayerPreview> :
                     <PlayerInput
@@ -55,10 +48,10 @@ const Battle = () => {
                         onSubmit={handleSubmit}
                     />}
             </div>
-            {playerData.playerOneImage && playerData.playerOneImage ?
+            {playerOneImage && playerOneImage ?
                 <Link to={{
                     pathname: 'result',
-                    search: `?playerOneName=${playerData.playerOneName}&playerTwoName=${playerData.playerTwoName}`
+                    search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`
                 }} className='button'>Battle</Link> :
                 null
             }
