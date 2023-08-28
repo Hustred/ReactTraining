@@ -5,6 +5,8 @@ import Popular from "./popular/Popular";
 import Battle from "./battle/Battle";
 import Nav from "./Nav";
 import BattleResult from "./battle/BattleResult";
+import {Provider} from "react-redux";
+import store from "./redux";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +37,9 @@ const router = createBrowserRouter([
     },
 ]);
 
-const App = () => <RouterProvider router={router} />
+const App = () =>
+    <Provider store={store} >
+        <RouterProvider router={router} />
+    </Provider>
 
 export default App;

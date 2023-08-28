@@ -1,10 +1,11 @@
 import {Fragment, memo} from "react";
+import {useDispatch} from "react-redux";
+import {setSelectedLanguage} from "../redux/popular/popular.actions";
 
 const languages = ['All', 'Javascript', 'Java', 'Ruby', 'Python', 'CSS'];
-const LanguageSelector = memo( ({selectedLanguage, handleLanguageIndexChange}) => {
+const LanguageSelector = memo( ({selectedLanguageIndex}) => {
 
-    const selectedLanguageIndex = languages.indexOf(selectedLanguage);
-
+    const dispatch = useDispatch();
     return (
         <Fragment>
             <ul className='languages'>
@@ -13,7 +14,7 @@ const LanguageSelector = memo( ({selectedLanguage, handleLanguageIndexChange}) =
                         key={index}
                         id={languages[index]}
                         style={{color: index === selectedLanguageIndex ? '#d0021b' : '#000000'}}
-                        onClick={handleLanguageIndexChange}>
+                        onClick={() => dispatch(setSelectedLanguage(index))}>
                         {language}
                     </li>
                 ))}

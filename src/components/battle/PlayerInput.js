@@ -1,11 +1,31 @@
-import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setPlayerName} from "../redux/battle/battle.actions";
 
 const PlayerInput = ({id, label, onSubmit}) => {
-    const [userName, setUserName] = useState('');
+    const dispatch = useDispatch();
+    const userNameOne = useSelector(state => state.battle.playerOneName)
+    const userNameTwo = useSelector(state => state.battle.playerTwoName)
+    const getUserName = () => {
+        if (id === 'playerOne') {
+            return userNameOne
+        }
+        if (id === 'playerTwo') {
+            return userNameTwo
+        }
+        return '';
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onSubmit(id, userName);
+        if (id === 'playerOne') {
+            onSubmit(id, userNameOne);
+        } else {
+            onSubmit(id, userNameTwo);
+        }
+    }
+
+    const dispatchNameChange = (name) => {
+        dispatch(setPlayerName({name, id}))
     }
 
     return (
@@ -16,10 +36,10 @@ const PlayerInput = ({id, label, onSubmit}) => {
                 id={id}
                 placeholder='GitHub Username'
                 autoComplete='off'
-                value={userName}
-                onChange={(event) => setUserName(event.target.value)}
+                value={getUserName()}
+                onChange={(event) => dispatchNameChange(event.target.value)}
             />
-            <button className='button' disabled={!userName.length}>Submit</button>
+            <button className='button' disabled={!getUserName().length}>Submit</button>
         </form>
     );
 }
