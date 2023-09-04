@@ -1,6 +1,6 @@
 import '../index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Home from "./Home";
+import Home from "./home/Home";
 import Popular from "./popular/Popular";
 import Battle from "./battle/Battle";
 import Nav from "./Nav";
