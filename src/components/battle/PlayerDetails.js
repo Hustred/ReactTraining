@@ -1,4 +1,6 @@
 import PlayerPreview from "./PlayerPreview";
+import {saveProfileStars} from "../../utils/api";
+import {Button} from "@mui/material";
 
 const PlayerDetails = ({label, score, profile}) => {
     return (
@@ -22,6 +24,7 @@ const PlayerDetails = ({label, score, profile}) => {
                     </ul>
                 </div>
             </PlayerPreview>
+            <Button onClick={() => saveProfileStars(profile.id, profile.name, score)}>Save to leaderboard</Button>
         </div>
     );
 }

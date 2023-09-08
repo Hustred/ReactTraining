@@ -55,3 +55,16 @@ const getUserData = (userName) => {
 }
 
 const sortPlayers = (players) => players.sort((a, b) => b.score - a.score);
+
+export function getProfileStars() {
+    return axios.get("https://64edd2531f8721827141d123.mockapi.io/profileStars")
+        .then(profiles => {
+            console.log(profiles);
+            return profiles.data
+        })
+}
+
+export function saveProfileStars (id, userName, stars) {
+    return axios.post("https://64edd2531f8721827141d123.mockapi.io/profileStars", {id: id, profileName: userName, starsCount: stars})
+        .then(profiles => profiles.data)
+}
