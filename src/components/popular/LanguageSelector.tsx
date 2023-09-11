@@ -1,9 +1,9 @@
-import {Fragment, memo} from "react";
-import {useDispatch} from "react-redux";
-import {setSelectedLanguage} from "../redux/popular/popular.actions";
+import React, { Fragment, memo } from "react";
+import { useDispatch } from "react-redux";
+import { setSelectedLanguage } from "../redux/popular/popular.slice";
 
-const languages = ['All', 'Javascript', 'Java', 'Ruby', 'Python', 'CSS'];
-const LanguageSelector = memo( ({selectedLanguageIndex}) => {
+const languages: string[] = ['All', 'Javascript', 'Java', 'Ruby', 'Python', 'CSS'];
+const LanguageSelector = memo(({ selectedLanguageIndex }: { selectedLanguageIndex: number }) => {
 
     const dispatch = useDispatch();
     return (
@@ -13,7 +13,7 @@ const LanguageSelector = memo( ({selectedLanguageIndex}) => {
                     <li
                         key={index}
                         id={languages[index]}
-                        style={{color: index === selectedLanguageIndex ? '#d0021b' : '#000000'}}
+                        style={{ color: index === selectedLanguageIndex ? '#d0021b' : '#000000' }}
                         onClick={() => dispatch(setSelectedLanguage(index))}>
                         {language}
                     </li>

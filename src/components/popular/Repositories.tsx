@@ -1,7 +1,9 @@
-const Repositories = ({repos}) => {
+import React from "react";
+
+const Repositories = ({repos}: {repos: Array<any>}) => {
     return (
         <ul className='popular-list'>
-            {repos.map((repo, index) => {
+            {repos.map((repo: any, index: number) => {
                 return (
                     <li key={repo.id} className='popular-item'>
                         <div className='popular-rank'>#{index + 1}</div>
