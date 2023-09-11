@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setPlayerName } from "../redux/battle/battle.actions";
 import {RootState} from "../redux/RootState";
 import React, {FC} from "react";
+import {setBattlePlayerName} from "../redux/battle/battle.slice";
 
 const PlayerInput: FC<{ id: string, label: string, onSubmit: Function }> = ({ id, label, onSubmit }) => {
     const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const PlayerInput: FC<{ id: string, label: string, onSubmit: Function }> = ({ id
                 autoComplete="off"
                 value={getUserName()}
                 onChange={(event) =>
-                    dispatch(setPlayerName({ name: event.target.value, id }))
+                    dispatch(setBattlePlayerName({ name: event.target.value, id }))
                 }
             />
             <button className="button" disabled={!getUserName().length}>

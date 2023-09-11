@@ -3,8 +3,8 @@ import PlayerPreview from "./PlayerPreview";
 import PlayerInput from "./PlayerInput";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {setPlayerNameAndImage} from "../redux/battle/battle.actions";
 import {RootState} from "../redux/RootState";
+import {setBattlePlayerNameAndAvatar} from "../redux/battle/battle.slice";
 
 const Battle = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Battle = (): JSX.Element => {
     const handleSubmit = useCallback(
         (id: string, userName: string) => {
             dispatch(
-                setPlayerNameAndImage({
+                setBattlePlayerNameAndAvatar({
                     name: userName,
                     id,
                     image: `https://github.com/${userName}.png?size200`,
@@ -28,7 +28,7 @@ const Battle = (): JSX.Element => {
     );
 
     const handleReset = (id: string) => {
-        dispatch(setPlayerNameAndImage({name: "", id, image: null}));
+        dispatch(setBattlePlayerNameAndAvatar({name: "", id, image: null}));
     };
 
     return (

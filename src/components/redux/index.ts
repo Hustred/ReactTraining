@@ -1,13 +1,13 @@
 import {configureStore} from "@reduxjs/toolkit";
-import popularReducer from "./popular/popular.reducer";
-import battleReducer from "./battle/battle.reducer";
-import homeReducer from "./home/home.reducer";
+import battleSlice from "./battle/battle.slice";
+import popularSlice from "./popular/popular.slice";
+import homeSlice from "./home/home.slice";
 
 const store = configureStore({
     reducer: {
-        popular: popularReducer,
-        battle: battleReducer,
-        home: homeReducer
+        popular: popularSlice,
+        battle: battleSlice,
+        home: homeSlice
     }
 })
 

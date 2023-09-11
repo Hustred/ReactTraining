@@ -3,13 +3,9 @@ import { makeBattle } from "../../utils/api";
 import Loading from "../Loading";
 import PlayerDetails from "./PlayerDetails";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    defineWinnerAndLoser,
-    setBattleResultLoading,
-    setPlayerName,
-} from "../redux/battle/battle.actions";
 import { useLocation } from "react-router-dom";
 import {RootState} from "../redux/RootState";
+import {defineBattleWinnerAndLoser, setBattlePlayerName, setBattleResultLoading} from "../redux/battle/battle.slice";
 
 const BattleResult = () => {
     const location = useLocation();
@@ -25,7 +21,7 @@ const BattleResult = () => {
         const searchParams = new URLSearchParams(location.search);
         if (!playerOneName) {
             dispatch(
-                setPlayerName({
+                setBattlePlayerName({
                     name: searchParams.get("playerOneName"),
                     id: "playerOne",
                 })
@@ -33,7 +29,7 @@ const BattleResult = () => {
         }
         if (!playerTwoName) {
             dispatch(
-                setPlayerName({
+                setBattlePlayerName({
                     name: searchParams.get("playerTwoName"),
                     id: "playerTwo",
                 })
@@ -42,7 +38,7 @@ const BattleResult = () => {
         makeBattle([playerOneName, playerTwoName])
             .then(([winner, loser]) => {
                 console.log(winner);
-                dispatch(defineWinnerAndLoser({ winner: winner, loser: loser }));
+                dispatch(defineBattleWinnerAndLoser({ winner: winner, loser: loser }));
             })
             .finally(() => dispatch(setBattleResultLoading(false)));
     }, [dispatch, location.search, playerOneName, playerTwoName]);

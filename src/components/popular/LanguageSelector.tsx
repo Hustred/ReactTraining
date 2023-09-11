@@ -1,6 +1,6 @@
 import React, { Fragment, memo } from "react";
 import { useDispatch } from "react-redux";
-import { setSelectedLanguage } from "../redux/popular/popular.actions";
+import { setSelectedLanguage } from "../redux/popular/popular.slice";
 
 const languages: string[] = ['All', 'Javascript', 'Java', 'Ruby', 'Python', 'CSS'];
 const LanguageSelector = memo(({ selectedLanguageIndex }: { selectedLanguageIndex: number }) => {

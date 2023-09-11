@@ -4,7 +4,7 @@ import Repositories from "./Repositories";
 import Loading from "../Loading";
 import LanguageSelector from "./LanguageSelector";
 import { useDispatch, useSelector } from "react-redux";
-import { setErrors, setRepos, setLoading } from "../redux/popular/popular.actions";
+import { setErrors, setRepos, setLoading } from "../redux/popular/popular.slice";
 import {RootState} from "../redux/RootState";
 
 const Popular = () => {
