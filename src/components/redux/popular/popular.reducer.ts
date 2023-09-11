@@ -4,15 +4,16 @@ import {
     POPULAR_SET_REPOS,
     POPULAR_SET_SELECTED_LANGUAGE
 } from "./popular.constants";
+import PopularState from "./PopularState";
 
-const initialState = {
+const initialState: PopularState = {
     selectedLanguageIndex: 0,
     loading: false,
     repos: [],
     error: false
 }
 
-const popularReducer = (state = initialState, action) => {
+const popularReducer = (state: PopularState = initialState, action: any) => {
     switch (action.type) {
         case POPULAR_SET_SELECTED_LANGUAGE:
             return {

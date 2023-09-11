@@ -4,6 +4,7 @@ import {
     BATTLE_SET_PLAYER_NAME,
     BATTLE_SET_PLAYER_NAME_AND_AVATAR,
 } from "./battle.constants";
+import BattleState from "./BattleState";
 
 const initialState = {
     playerOneName: '',
@@ -15,7 +16,7 @@ const initialState = {
     loadingBattleResult: true
 }
 
-const battleReducer = (state = initialState, action) => {
+const battleReducer = (state: BattleState = initialState, action: any) => {
     switch (action.type) {
         case BATTLE_SET_PLAYER_NAME: {
             if (action.payload.id === 'playerOne') {
